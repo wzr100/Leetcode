@@ -1,0 +1,14 @@
+算法思想：
+比较两个二叉树l1和l2
+l1->left和l2->right,及l1->right和l2->left是否相等，递归执行
+
+bool isSymmetric(TreeNode* root) {
+    if(!root)return true;
+    return isSymmetric1(root->left,root->right);
+}
+bool isSymmetric1(TreeNode* l1, TreeNode* l2){
+    if(!l1 && !l2) return true;
+    if(!l1 || !l2) return false;
+    if(l1->val!=l2->val) return false;     
+    return isSymmetric1(l1->left,l2->right) && isSymmetric1(l1->right,l2->left);
+}
