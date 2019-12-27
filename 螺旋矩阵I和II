@@ -1,0 +1,33 @@
+12/27
+思路：
+1.设置up,left,down,right坐标范围。
+2.按照四个方向→↓←↑循环，判断好边界条件
+
+
+vector<vector<int>> generateMatrix(int n) {
+    vector<vector<int>> res(n,vector<int>(n,0));
+    int val=0,up=0,left=0,down=n-1,right=n-1;
+    while(true){
+        if(left>right)break;
+        for(int i=left;i<=right;i++){
+            res[up][i]=++val;
+        }
+        up++;
+        if(up>down)break;            
+        for(int i=up;i<=down;i++){
+            res[i][right]=++val;
+        }
+        right--;
+        if(left>right)break;            
+        for(int i=right;i>=left;i--){
+            res[down][i]=++val;
+        }
+        down--;      
+        if(up>down)break;            
+        for(int i=down;i>=up;i--){
+            res[i][left]=++val;
+        }
+        left++;      
+    }
+    return res;
+}
