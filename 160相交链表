@@ -1,0 +1,44 @@
+2019/12/28
+思路一：
+1、双指针curA，curB,先遍历出各自长度，
+2、然后拨回头结点，让长的那个链表先走|k=lenA-lenB|步。
+3、同时出发，返回相等结点。
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode *res=NULL;
+        ListNode *curA=headA;
+        ListNode *curB=headB;
+        int lenA=0,lenB=0,k=0;
+        while(curA||curB){
+            if(curA){
+                lenA++;
+                curA=curA->next;
+            }
+             if(curB){
+                lenB++;
+                curB=curB->next;                
+            }
+        }
+        curA=headA;
+        curB=headB;        
+        if(lenA>lenB){
+            k=lenA-lenB;
+            for(int i=0;i<k;i++){
+                curA=curA->next;
+                if(!curA) return res;
+            }
+        }
+        else{
+            k=lenB-lenA;
+            for(int i=0;i<k;i++){
+                curB=curB->next;
+                if(!curB) return res;
+            }
+        }
+        while(curA && curB){
+            if (curA==curB) return curA;
+            curA=curA->next;
+            curB=curB->next;
+        }
+        return res;
+    }
+    思路二：双指针，只不过先到的指针，去另一个链表头，返回相遇结点。
