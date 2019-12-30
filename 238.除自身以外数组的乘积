@@ -1,0 +1,18 @@
+2019/12/30
+思路:
+1.累乘法计算数组每个元素的左积和右积，左积是从左往右累乘，右积是从右往左累乘。
+2.计算每个元素的左积和右积即是除自身以外数组的乘积。
+   vector<int> productExceptSelf(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> res(n,1),left(n,1),right(n,1);
+        for(int i=1;i<n;i++){
+            left[i]=left[i-1]*nums[i-1];
+        }
+        for(int i=n-2;i>=0;i--){
+            right[i]=right[i+1]*nums[i+1];
+        }
+        for(int i=0;i<n;i++){
+            res[i]=left[i]*right[i];
+        }
+        return res;
+    }
