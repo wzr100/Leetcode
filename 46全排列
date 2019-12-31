@@ -1,0 +1,23 @@
+12/31
+思路：
+回溯法，画出选择树，从数组中选择每个分支走完后，撤销之前的选择。
+vector<vector<int>> res;
+vector<vector<int>> permute(vector<int>& nums) {
+    vector<int> path;
+    backtrack(nums,path);
+    return res;       
+}
+
+void backtrack(vector<int>& nums,vector<int> path){
+    if(path.size()==nums.size()){
+        res.push_back(path);
+        return;
+    }
+    for(int i=0;i<nums.size();i++){
+        if(find(path.begin(),path.end(),nums[i])!=path.end()) 
+            continue;
+        path.push_back(nums[i]);
+        backtrack(nums,path);
+        path.pop_back();
+    }  
+}
